@@ -68,7 +68,13 @@ public class Caballero extends Piezas {
                 tablero[k][l] = tablero[i][j];
                 tablero[i][j] = "null";
                 return Arreglo;
-            } else {
+                
+            } else if(k==0&&l==0||k==0&&l==4||k==0&&l==9||k==4&&l==0||k==9&&l==0||k==9&&l==4||k==9&&l==9||k==4&&l==9){
+                tablero[k][l] = tablero[i][j];
+                tablero[i][j] = "null";
+                return Arreglo;
+            
+            }else {
                 
                 return Arreglo;
             }

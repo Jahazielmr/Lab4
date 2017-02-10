@@ -67,6 +67,7 @@ public class Juego {
         Piezas movCaballero = new Caballero();
         Piezas movDuende = new Duende();
         Piezas movDragon = new Dragon();
+        Piezas movRey = new Rey();
         
         System.out.println("Ingrese la posicion en y de pieza que desea mover");
         int i = sc.nextInt();
@@ -101,7 +102,8 @@ public class Juego {
             case "RB":
             case "RN":
                //no se puede mover el rey
-                if(tablero )
+               movRey.Movimiento(i, j, k, l, tablero, Arreglo);
+                
                 
                 
                break; 
