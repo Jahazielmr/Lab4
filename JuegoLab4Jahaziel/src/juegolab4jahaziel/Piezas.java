@@ -3,7 +3,7 @@ package juegolab4jahaziel;
 
 import java.awt.Color;
 
-public class Piezas {
+public abstract class Piezas {
     protected Color colo;
     protected String Material;
 
@@ -36,7 +36,9 @@ public class Piezas {
         return "Piezas{" + "colo=" + colo + ", Material=" + Material + '}';
     }
     
+    public abstract String [] Movimiento(int i, int j, int k, int l, String [][] tablero, String [] arreglo);
     
+   
     
     
 }

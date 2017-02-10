@@ -1,72 +1,62 @@
 package juegolab4jahaziel;
 
+import com.sun.prism.paint.Color;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Juego {
     
-    static String [][] tablero = new String [8][8];
-    static Scanner sc = new Scanner (System.in);
-            
+     String [][] tablero = new String [10][10];
+     Scanner sc = new Scanner (System.in);
+     Piezas p = new Caballero();
     public String [][] Tablero (){
-        for (int i = 0; i <= 8; i++) {
-            for (int j = 0; j <= 8; j++) {
-                if (i==1&&(j==0||j==1||j==2||j==3||j==4||j==5||j==6||j==7)){
-                    tablero[i][j] = "Peon B";
-                } else if (i==6&&(j==0||j==1||j==2||j==3||j==4||j==5||j==6||j==7)){
-                    tablero[i][j] = "Peon N";
-                    
-                } else if (i==0&&(j==1)){
-                    tablero[i][j]= futuro();
-                    
-                } else if (i==0&&(j==0)){
-                    tablero[i][j]= futuro();
-                    
-                } else if (i==0&&(j==2)){
-                    tablero[i][j]= futuro();
-                    
-                } else if (i==0&&(j==3)){
-                    tablero[i][j]= futuro();
-                    
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                tablero[i][j]= "null";
+            }
+        }
+        
+        for (int i = 0; i <= 10; i++) {
+            for (int j = 0; j <= 10; j++) {
+                if (i==0&&(j==0||j==9)){
+                    tablero[i][j] = "CB";
+                } else if (i==0&&(j==2||j==7)){
+                    tablero[i][j] = "FB";
                 } else if (i==0&&(j==4)){
-                    tablero[i][j]= futuro();
+                    tablero[i][j]= "RB";
                     
-                } else if (i==0&&(j==5)){
-                    tablero[i][j]= futuro();
+                } else if (i==1&&(j==0||j==9||j==3||j==6)){
+                    tablero[i][j]= "DB";
                     
-                } else if (i==0&&(j==6)){
-                    tablero[i][j]= futuro();
-                    
-                } else if (i==0&&(j==7)){
-                    tablero[i][j]= futuro();
+                } else if (i==1&&(j==4)){
+                    tablero[i][j]= "CB";
+                  
                 }
-                else if (i==7&&(j==1)){
-                    tablero[i][j]= futuro2();
+                 else if (i==1&&(j==5)){
+                    tablero[i][j]= "FB";
                     
-                } else if (i==7&&(j==0)){
-                    tablero[i][j]= futuro2();
+                } //
+                
+                if (i==9&&(j==0||j==9)){
+                    tablero[i][j] = "CN";
+                } else if (i==9&&(j==2||j==7)){
+                    tablero[i][j] = "FN";
+                } else if (i==9&&(j==5)){
+                    tablero[i][j]= "RN";
                     
-                } else if (i==7&&(j==2)){
-                    tablero[i][j]= futuro2();
+                } else if (i==8&&(j==0||j==9||j==3||j==6)){
+                    tablero[i][j]= "DN";
                     
-                } else if (i==7&&(j==3)){
-                    tablero[i][j]= futuro2();
-                    
-                } else if (i==7&&(j==4)){
-                    tablero[i][j]= futuro2();
-                    
-                } else if (i==7&&(j==5)){
-                    tablero[i][j]= futuro2();
-                    
-                } else if (i==7&&(j==6)){
-                    tablero[i][j]= futuro2();
-                    
-                } else if (i==7&&(j==7)){
-                    tablero[i][j]= futuro2();
+                } else if (i==8&&(j==5)){
+                    tablero[i][j]= "CN";
+                  
                 }
+                 else if (i==8&&(j==4)){
+                    tablero[i][j]= "FN";
+                 }
                 
-                
-                 
             }
         }
         return tablero;
@@ -74,14 +64,17 @@ public class Juego {
     
     public String [] Lee_Movimiento(){
         String [] Arreglo = new String [4];
+        Piezas movCaballero = new Caballero();
+        Piezas movDuende = new Duende();
+        Piezas movDragon = new Dragon();
         
-        System.out.println("Ingrese la posicion en x de pieza que desea mover");
-        int i = sc.nextInt();
         System.out.println("Ingrese la posicion en y de pieza que desea mover");
+        int i = sc.nextInt();
+        System.out.println("Ingrese la posicion en x de pieza que desea mover");
         int j = sc.nextInt();
-        System.out.println("Ingrese la posicion en x a donde movera");
-        int k = sc.nextInt();
         System.out.println("Ingrese la posicion en y a donde movera");
+        int k = sc.nextInt();
+        System.out.println("Ingrese la posicion en x a donde movera");
         int l = sc.nextInt();
         
         Arreglo [0] = String.valueOf(i);
@@ -90,114 +83,29 @@ public class Juego {
         Arreglo [3] = String.valueOf(l);
         
         switch (tablero[i][j]){
-            case "Dama B"+"Dama N":
+                case "CB":
+                case "CN":
+                    movCaballero.Movimiento(i, j, k, l, tablero, Arreglo);
                 
-                if (tablero [k][l].equals("Dama B")||tablero [k][l].equals("Dama N")||tablero [k][l].equals("Caballo B")||tablero [k][l].equals("Caballo N")||
-                        tablero [k][l].equals("Rey B")||tablero [k][l].equals("Rey N")||tablero [k][l].equals("Alfil B")||tablero [k][l].equals("Alfil N")||
-                        tablero [k][l].equals("Torre N")||tablero [k][l].equals("Torre B")){
-                    
-                    tablero [i][j] = tablero [i][j];
-                    return Arreglo;
-                    
-                } else if (tablero [k][l].equals("null")){
-                    tablero [k][l] = tablero [i][j];
-                    tablero [i][j] = "null";
-                    return Arreglo;
-                } else{
-                    tablero [i][j] = tablero [i][j];
-                    return Arreglo;
-                }
-       
-            case "Caballo B"+"Caballo N":
+                case "DB"://duende
+                case "DN":
                 
-                if (tablero [k][l].equals("Dama B")||tablero [k][l].equals("Dama N")||tablero [k][l].equals("Caballo B")||tablero [k][l].equals("Caballo N")||
-                        tablero [k][l].equals("Rey B")||tablero [k][l].equals("Rey N")||tablero [k][l].equals("Alfil B")||tablero [k][l].equals("Alfil N")||
-                        tablero [k][l].equals("Torre N")||tablero [k][l].equals("Torre B")){
-                    
-                    tablero [i][j] = tablero [i][j];
-                    return Arreglo;
-                    
-                } else if (tablero [k][l].equals("null")&&(k - i) == 2 && (l - j) ==1||((k-i)==1&&(l-j==2))){
-                    tablero [k][l] = tablero [i][j];
-                    tablero [i][j] = "null";
-                    return Arreglo;
-                } else{
-                    tablero [i][j] = tablero [i][j];
-                    return Arreglo;
-                }
+                    movDuende.Movimiento(i, j, k, l, tablero, Arreglo);
                 
-            case "Rey B"+"Rey N":
-                    
-                if (tablero [k][l].equals("Dama B")||tablero [k][l].equals("Dama N")||tablero [k][l].equals("Caballo B")||tablero [k][l].equals("Caballo N")||
-                        tablero [k][l].equals("Rey B")||tablero [k][l].equals("Rey N")||tablero [k][l].equals("Alfil B")||tablero [k][l].equals("Alfil N")||
-                        tablero [k][l].equals("Torre N")||tablero [k][l].equals("Torre B")){
-                    
-                    tablero [i][j] = tablero [i][j];
-                    return Arreglo;
-                    
-                } else if (tablero [k][l].equals("null")&&(k - i) == 1 && (l - j) == 1||(k-i==1)){
-                    tablero [k][l] = tablero [i][j];
-                    tablero [i][j] = "null";
-                    return Arreglo;
-                } else{
-                    tablero [i][j] = tablero [i][j];
-                    return Arreglo;
-                }
+            case "FB"://dragon igual que el CApitan
+            case "FN":
+                
+               movDragon.Movimiento(i, j, k, l, tablero, Arreglo);
                 
             
-            case "Alfil B"+"Alfil N":
-                 
-                if (tablero [k][l].equals("Dama B")||tablero [k][l].equals("Dama N")||tablero [k][l].equals("Caballo B")||tablero [k][l].equals("Caballo N")||
-                        tablero [k][l].equals("Rey B")||tablero [k][l].equals("Rey N")||tablero [k][l].equals("Alfil B")||tablero [k][l].equals("Alfil N")||
-                        tablero [k][l].equals("Torre N")||tablero [k][l].equals("Torre B")){
-                    
-                    tablero [i][j] = tablero [i][j];
-                    return Arreglo;
-                    
-                } else if (tablero [k][l]== "null"&&(k - i) == 2 && (l - j) == 2||(k - i) == 1 && (l - j) == 1||(k - i) == 3 && (l - j) == 3
-                        ||(k - i) == 4 && (l - j) == 4||(k - i) == 5 && (l - j) == 5||(k - i) == 6 && (l - j) == 6||(k - i) == 7 && (l - j) == 7){
-                    tablero [k][l] = tablero [i][j];
-                    tablero [i][j] = "null";
-                    return Arreglo;
-                } else{
-                    tablero [i][j] = tablero [i][j];
-                    return Arreglo;
-                }
-            
-            case "Torre B"+"Torre N":
-                 if (tablero [k][l].equals("Dama B")||tablero [k][l].equals("Dama N")||tablero [k][l].equals("Caballo B")||tablero [k][l].equals("Caballo N")||
-                        tablero [k][l].equals("Rey B")||tablero [k][l].equals("Rey N")||tablero [k][l].equals("Alfil B")||tablero [k][l].equals("Alfil N")||
-                        tablero [k][l].equals("Torre N")||tablero [k][l].equals("Torre B")){
-                    
-                    tablero [i][j] = tablero [i][j];
-                    return Arreglo;
-                    
-                } else if (tablero [k][l]== "null" && (k - i) == 2||(k - i) == 1||(k - i) == 3 ||(k - i) == 4||(k - i) == 5||(k - i) == 6||(k - i) == 7||(l - j) == 2||(l - j) == 1||(l - j) == 3 ||(l-j) == 4||(l - j) == 5||(l - j) == 6||(l - j) == 7){
-                    tablero [k][l] = tablero [i][j];
-                    tablero [i][j] = "null";
-                    return Arreglo;
-                } else{
-                    tablero [i][j] = tablero [i][j];
-                    return Arreglo;
-                }
-            case "Peon B"+"Peon N":
-                if (tablero [k][l].equals("Dama B")||tablero [k][l].equals("Dama N")||tablero [k][l].equals("Caballo B")||tablero [k][l].equals("Caballo N")||
-                        tablero [k][l].equals("Rey B")||tablero [k][l].equals("Rey N")||tablero [k][l].equals("Alfil B")||tablero [k][l].equals("Alfil N")||
-                        tablero [k][l].equals("Torre N")||tablero [k][l].equals("Torre B")){
-                    
-                    tablero [i][j] = tablero [i][j];
-                    return Arreglo;
-                    
-                } else if (tablero [k][l].equals("null")&&(k - i) == 1||(k-i)==2){
-                    tablero [k][l] = tablero [i][j];
-                    tablero [i][j] = "null";
-                    return Arreglo;
-                } else{
-                    tablero [i][j] = tablero [i][j];
-                    return Arreglo;
-                }
+            case "RB":
+            case "RN":
+               //no se puede mover el rey
+                if(tablero )
                 
-            
+                
+               break; 
+               
         }
         tablero [k][l] = tablero [i][j];
         tablero [i][j] = "null";
@@ -213,36 +121,6 @@ public class Juego {
     }
     
     
-    public static String[] futuro = {
-        "Dama B",
-        "Rey B",
-        "Caballo B",
-        "Alfil B",
-        "Torre B",
-    };
-    
-    public static String futuro() {
-        Random random=new Random();
-        String prediccion;
-        prediccion = futuro[random.nextInt(futuro.length)];
-        return prediccion;
-    }
-    
-    public static String[] futuro2 = {
-        "Dama N",
-        "Rey N",
-        "Caballo N",
-        "Alfil N",
-        "Torre N",
-    };
-    
-    public static String futuro2() {
-        Random random=new Random();
-        
-        String prediccion;
-        prediccion = futuro[random.nextInt(futuro.length)];
-        return prediccion;
-    }
     
     
     

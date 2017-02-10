@@ -11,6 +11,7 @@ public class JuegoLab4Jahaziel {
     public static void main(String[] args) {
         String option = "";
         ArrayList<Jugador> jugador = new ArrayList();
+        Juego game = new Juego();
         while (!option.equalsIgnoreCase("E")) {
             option = JOptionPane.showInputDialog("Juego de mesa\n"
                     + "A-Jugadores\n"
