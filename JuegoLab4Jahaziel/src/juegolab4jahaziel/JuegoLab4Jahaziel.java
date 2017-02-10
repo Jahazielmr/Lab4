@@ -1,5 +1,6 @@
 package juegolab4jahaziel;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -9,6 +10,7 @@ public class JuegoLab4Jahaziel {
 
     public static void main(String[] args) {
         String option = "";
+        ArrayList<Jugador> jugador = new ArrayList();
         while (!option.equalsIgnoreCase("E")) {
             option = JOptionPane.showInputDialog("Juego de mesa\n"
                     + "A-Jugadores\n"
@@ -17,7 +19,50 @@ public class JuegoLab4Jahaziel {
             switch (option) {
                 case "a":
                 case "A":
+                    String leer = JOptionPane.showInputDialog("Jugador\n"
+                            + "A-Agregar\n"
+                            + "B-Listar\n"
+                            + "C-Eliminar\n");
 
+                    switch (leer) {
+
+                        case "a":
+                        case "A":
+
+                            String Nombre,
+                             Nombre_usuario,
+                             Nacimiento,
+                             sexo;
+                            int edad,
+                             score = 0;
+                            Nombre = (JOptionPane.showInputDialog("Ingrese Nombre:"));
+                            edad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese edad"));
+                            Nombre_usuario = (JOptionPane.showInputDialog("Ingrese nombre de usuario:"));
+                            Nacimiento = (JOptionPane.showInputDialog("Ingrese lugar de nacimiento:"));
+                            sexo = (JOptionPane.showInputDialog("Ingrese sexo:"));
+
+                            jugador.add(new Jugador(Nombre, Nombre_usuario, Nacimiento, sexo, edad, score));
+                            break;
+                        case "b":
+                        case "B":
+                            String p = "";
+                            for (Object temp :jugador ) {
+                            p += jugador.toString() + "\n";
+                            }
+                            JOptionPane.showMessageDialog(null, p);
+                            break;
+                        
+                        case "c":
+                        case "C":
+                            int posicion = Integer.parseInt(
+                            JOptionPane.showInputDialog("Ingrese posicion para eliminar una nave:")
+                            );
+
+                            jugador.remove(posicion);
+                            
+                            break;
+
+                    }
                     break;
                 case "b":
                 case "B":
